@@ -1,8 +1,8 @@
-def fiboArray(n):
-    f1 = 1
+def fiboarray(n):
+    f1 = 0
     f2 = 1
-    fibo = [1, 1]
-    for i in range (1,n-1):
+    fibo = [0]
+    for i in range (1,n):
         sum = f1 + f2
         fibo.append(sum)
         f2 = f1
@@ -10,4 +10,4 @@ def fiboArray(n):
     return fibo
 
 
-print(fiboArray(5))
+print(fiboarray(10))
