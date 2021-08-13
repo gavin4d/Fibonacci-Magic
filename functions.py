@@ -10,4 +10,5 @@ def fiboarray(n):
     return fibo
 
 
-print(fiboarray(10))
+fibo = fiboarray(10)
+print(fibo[-1])
