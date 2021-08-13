@@ -1,4 +1,4 @@
-def fiboArray(n):
+def fiboarray(n):
     f1 = 1
     f2 = 1
     fibo = [1, 1]
@@ -10,4 +10,4 @@ def fiboArray(n):
     return fibo
 
 
-print(fiboArray(5))
+print(fiboarray(5))
