@@ -39,5 +39,8 @@ class AboutFibo(Scene):
             dotGroups2.add(dotGroups1)
             dotGroups1 = dotGroups2old
             self.play(dotGroups2.animate.set_color(color.RED))
+            
+        self.wait(1)
+        self.play(FadeIn(Square().scale(10).set_fill(color.BACKGROUND).set_opacity(1)))
 
 
