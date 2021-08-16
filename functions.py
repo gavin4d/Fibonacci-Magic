@@ -8,7 +8,3 @@ def fiboarray(n):
         f2 = f1
         f1 = sum
     return fibo
-
-
-fibo = fiboarray(10)
-print(fibo[-1])

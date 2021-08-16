@@ -9,6 +9,7 @@ class Start(Scene):
         fibo = fiboarray(10)
         last = len(fibo)  # keeps track of the length of the fibo array
         self.camera.background_color = WHITE
+        self.camera.scale(0.5)
         dots = [Dot().set_color(RED).move_to(UP * 0.25 * (24 - i)) for i in range(0, fibo[-1])]
 
         baseText = Text('×     +     ×').scale(0.5).set_color(BLACK).move_to(DOWN * 3)
