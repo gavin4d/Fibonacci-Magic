@@ -4,14 +4,14 @@ import color
 from functions import *
 
 
-class Start(Scene):
+class Start(MovingCameraScene):
 
     def construct(self):
         m = 1
         fibo = fiboarray(10)
         last = len(fibo)  # keeps track of the length of the fibo array
+
         self.camera.background_color = color.BACKGROUND
-        self.camera.scale(0.5)
         dots = [Dot().set_color(color.RED).move_to(UP * 0.25 * (24 - i)) for i in range(0, fibo[-1])]
 
         baseText = Text('×     +     ×').scale(0.5).set_color(BLACK).move_to(DOWN * 3)
@@ -39,7 +39,10 @@ class Start(Scene):
         numberhidebox2.set_fill(color.BACKGROUND, opacity=1)
         self.add(numberhidebox1, numberhidebox2)
 
-        self.play(FadeIn(baseText), FadeIn(t1), FadeIn(t2), FadeIn(t3), FadeIn(t4), GrowFromCenter(dots[0]),
+        self.camera.frame.save_state()
+        camScale = 1.3
+
+        self.play(self.camera.frame.animate.scale(camScale).move_to(UP * 1.5), FadeIn(baseText), FadeIn(t1), FadeIn(t2), FadeIn(t3), FadeIn(t4), GrowFromCenter(dots[0]),
                   GrowFromCenter(dots[1]), GrowFromCenter(dots[2]), GrowFromCenter(dots[3]),
                   GrowFromCenter(dots[4]), GrowFromCenter(dots[5]), GrowFromCenter(dots[6]),
                   GrowFromCenter(dots[7]), GrowFromCenter(dots[8]), GrowFromCenter(dots[9]),
@@ -60,7 +63,7 @@ class Start(Scene):
         self.play(group1.animate.set_color(color.BLUE).shift(RIGHT * 0.125), group2.animate.shift(LEFT * 0.125),
                   t1.animate.shift(UP * 0.5),t2.animate.shift(DOWN * 0.5), t3.animate.shift(UP * 0.5),
                   t4.animate.shift(DOWN * 0.5))
-        self.play(group1.animate.shift(DOWN * 0.25 * 21))
+        self.play(group1.animate.shift(DOWN * 0.25 * 21), Restore(self.camera.frame))
         self.wait(1)
 
         group1.remove(*[dots[i] for i in range(0,13)])
@@ -140,3 +143,4 @@ class Start(Scene):
         self.play(group2.animate.set_color(color.RED), t1.animate.shift(UP * 0.5), t2.animate.shift(DOWN * 0.5),
                   t3.animate.shift(UP * 0.5), t4.animate.shift(DOWN * 0.5))
         self.wait(1)
+        self.play(FadeIn(Square().scale(10).set_fill(color.BACKGROUND).set_opacity(1)))
