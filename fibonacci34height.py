@@ -16,6 +16,11 @@ class Start(MovingCameraScene):
 
         baseText = Text('×     +     ×').scale(0.5).set_color(BLACK).move_to(DOWN * 3)
 
+        rect = Rectangle(color=color.YELLOW, width=0.43, height=0.4)
+        rect.move_to(RIGHT * 0.4 + DOWN * 3)
+
+
+
         t1 = VGroup()
         t2 = VGroup()
         t3 = VGroup()
@@ -32,10 +37,7 @@ class Start(MovingCameraScene):
         t3.scale(0.5).arrange(DOWN).move_to(RIGHT * 0.4 + DOWN * (2 + 3))
         t4.scale(0.5).arrange(DOWN).move_to(RIGHT * 1.15 + UP * (2 - 3))
 
-        rect = Rectangle(color=BLUE, width=0.5, height=1.0)
-        # rect.move_to(RIGHT * 0.4 + DOWN * (2 + 3))
-
-        self.add(t1, t2, t3, t4, rect)
+        self.add(t1, t2, t3, t4)
 
         numberhidebox1 = Square().scale(2).move_to(UP * (2.25 - 3))
         numberhidebox1.set_fill(color.BACKGROUND, opacity=1)
@@ -46,7 +48,7 @@ class Start(MovingCameraScene):
         self.camera.frame.save_state()
         camScale = 1.3
 
-        self.play(self.camera.frame.animate.scale(camScale).move_to(UP * 1.5), FadeIn(rect), FadeIn(baseText), FadeIn(t1), FadeIn(t2), FadeIn(t3), FadeIn(t4), GrowFromCenter(dots[0]),
+        self.play(self.camera.frame.animate.scale(camScale).move_to(UP * 1.5), FadeIn(baseText), FadeIn(t1), FadeIn(t2), FadeIn(t3), FadeIn(t4), GrowFromCenter(dots[0]),
                   GrowFromCenter(dots[1]), GrowFromCenter(dots[2]), GrowFromCenter(dots[3]),
                   GrowFromCenter(dots[4]), GrowFromCenter(dots[5]), GrowFromCenter(dots[6]),
                   GrowFromCenter(dots[7]), GrowFromCenter(dots[8]), GrowFromCenter(dots[9]),
@@ -64,6 +66,7 @@ class Start(MovingCameraScene):
         group2 = VGroup()
         group2.add(*[dots[i] for i in range(13,34)])
 
+
         self.play(group1.animate.set_color(color.BLUE).shift(RIGHT * 0.125), group2.animate.shift(LEFT * 0.125),
                   t1.animate.shift(UP * 0.5),t2.animate.shift(DOWN * 0.5), t3.animate.shift(UP * 0.5),
                   t4.animate.shift(DOWN * 0.5))
@@ -75,10 +78,13 @@ class Start(MovingCameraScene):
         group2.remove(*[dots[i] for i in range(13,21)])
         group1.add(*[dots[i] for i in range(13, 21)])
 
+        brace = BraceBetweenPoints(dots[13].get_center(), dots[20].get_center(), color=color.YELLOW)
+        self.add(brace)
+
         self.play(group1.animate.set_color(color.BLUE).shift(RIGHT * 0.125 * 3), group2.animate.set_color(color.RED).shift(LEFT * 0.125),
                   t1.animate.shift(UP * 0.5), t2.animate.shift(DOWN * 0.5), t3.animate.shift(UP * 0.5),
                   t4.animate.shift(DOWN * 0.5))
-        self.play(group1.animate.shift(DOWN * 0.25 * 13))
+        self.play(FadeIn(rect), FadeOut(brace), group1.animate.shift(DOWN * 0.25 * 13))
         self.wait(1)
 
         group1.remove(*[dots[i] for i in range(13, 21)])
