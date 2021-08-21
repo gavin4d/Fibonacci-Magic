@@ -1,7 +1,5 @@
 from typing_extensions import runtime
 from manim import *
-from manim.animation.animation import DEFAULT_ANIMATION_LAG_RATIO
-from manim.utils import tex
 from functions import *
 import color
 
@@ -37,15 +35,15 @@ class AddingSquares(Scene):
 
         general = Tex('${f_n}^2\quad +\quad {f_{n+1}}^2\quad =\quad f_{2n+1}$').set_color(BLACK)
 
-        self.play(LaggedStart(*[FadeIn(labels[i][0]) for i in range(0,rows)], lag_ratio=0.15, run_time=1))
-        self.wait(1)
+        self.play(LaggedStart(*[FadeIn(labels[i][0]) for i in range(0,rows)], lag_ratio=0.15, run_time=2))
+        self.wait(4)
         self.play(LaggedStart(*[FadeIn(labels[i][1]) for i in range(0,rows)], lag_ratio=0.15, run_time=1))
-        self.wait(1)
+        self.wait(6)
         self.play(FadeOut(*[labels[i][1] for i in range(0,rows)]))
         self.wait(0.5)
         self.play(LaggedStart(*[FadeIn(*[labels[i][l] for i in range(0,rows)]) for l in range(2,5)]))
-        self.wait(2)
+        self.wait(8)
         self.play(FadeOut(*[labels[i][l] for i in range(0,rows) for l in [0,2,3,4]]))
         self.play(FadeIn(general))
-        self.wait(2)
+        self.wait(5)
         self.play(FadeIn(Square().scale(10).set_fill(color.BACKGROUND).set_opacity(1)))
