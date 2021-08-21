@@ -109,8 +109,86 @@ class PauseOnSquare(MovingCameraScene):
         exp1 = Text('2').scale(0.3).set_color(BLACK).move_to(RIGHT * 0.95 + DOWN * 2.75)
         exp2 = Text('2').scale(0.3).set_color(BLACK).move_to(LEFT * 0.6 + DOWN * 2.75)
         self.play(Write(exp1), Write(exp2))
+
         result = Text('= 34').scale(0.5).set_color(BLACK).move_to(RIGHT * 2 + DOWN * 3)
         self.play(Write(result))
+        self.wait(1)
+
+        thirtyfour = Text(str(fiboarray(10)[9])).scale(0.5).set_color(BLACK).move_to(LEFT * 0.375 + DOWN * 3)
+
+        self.remove(t1, t2, t3, t4)
+        self.play(Transform(result, thirtyfour), FadeOut(exp1), FadeOut(exp2), FadeOut(baseText))
+
+        vgap = 0.55
+
+        evenfibos = VGroup(Text("8"), Text("21"), Text("55"), Text("144"))
+        oddfibos = VGroup(Text("5"), Text("13"), Text("34"), Text("89"))
+        evenfibos.set_color(color.YELLOW).scale(0.5)
+        oddfibos.set_color(BLACK).scale(0.5)
+
+
+        redsize = 8
+        bluesize = 5
+        redgroup1 = VGroup()
+        for i in range(redsize):
+            for j in range(redsize):
+                redgroup1.add(Dot([i * 0.25, j * 0.25, 0], color=color.RED))
+        for i in range(bluesize):
+            for j in range(bluesize):
+                redgroup1.add(Dot([i * 0.25 + (redsize * 0.25), j * 0.25 + (redsize * 0.25), 0], color=color.BLUE))
+
+        redgroup1.next_to(group1, RIGHT, buff= 1)
+        redgroup1center = VGroup(redgroup1[24], redgroup1[32])
+        oddfibos[3].next_to(redgroup1center, DOWN, buff=vgap)
+
+        redsize = 3
+        bluesize = 2
+        redgroup2 = VGroup()
+        for i in range(redsize):
+            for j in range(redsize):
+                redgroup2.add(Dot([i * 0.25, j * 0.25, 0], color=color.RED))
+        for i in range(bluesize):
+            for j in range(bluesize):
+                redgroup2.add(Dot([i * 0.25 + (redsize * 0.25), j * 0.25 + (redsize * 0.25), 0], color=color.BLUE))
+
+        redgroup2.next_to((group2), LEFT, buff=1)
+        oddfibos[1].next_to(redgroup2[3], DOWN, buff=vgap)
+
+
+        redsize = 2
+        bluesize = 1
+        redgroup3 = VGroup()
+        for i in range(redsize):
+            for j in range(redsize):
+                redgroup3.add(Dot([i * 0.25, j * 0.25, 0], color=color.RED))
+        for i in range(bluesize):
+            for j in range(bluesize):
+                redgroup3.add(Dot([i * 0.25 + (redsize * 0.25), j * 0.25 + (redsize * 0.25), 0], color=color.BLUE))
+
+
+        redgroup3.next_to(redgroup2[1], LEFT, buff=1)
+        oddfibos[0].next_to(redgroup3[2], DOWN, buff=vgap)
+
+        oddfibos[2].move_to(result)
+
+        evenfibos[0].next_to(oddfibos[0], RIGHT, buff=0.65)
+        evenfibos[1].next_to(oddfibos[1], RIGHT, buff=0.8)
+        evenfibos[2].next_to(result, RIGHT, buff=1.2)
+        evenfibos[3].next_to(oddfibos[3], RIGHT, buff=1.5)
+
+        self.add(redgroup1, redgroup2, redgroup3, oddfibos)
+        self.remove(oddfibos[2])
+
+        self.wait(1)
+        self.play(FadeIn(evenfibos))
+        self.wait(1)
+
+        labels = VGroup(Tex('$f_5$'), Tex('$f_7$'), Tex('$f_9$'), Tex('$f_{11}$'))
+        labels.set_color(BLACK).scale(0.8)
+        for i in range(4):
+            labels[i].move_to(oddfibos[i].get_center())
+        self.play(Transform(oddfibos[0], labels[0]), Transform(oddfibos[1], labels[1]), Transform(result,
+        labels[2]), Transform(oddfibos[3], labels[3]), FadeOut(evenfibos))
 
         self.wait(1)
         self.play(FadeIn(Square().scale(10).set_fill(color.BACKGROUND).set_opacity(1)))
