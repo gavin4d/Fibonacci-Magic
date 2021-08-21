@@ -43,9 +43,12 @@ class Start(Scene):
         group2 = VGroup()
         group2.add(*[dots[i] for i in range(8,21)])
 
+        self.wait(0.5)
+
         self.play(group1.animate.set_color(color.BLUE).shift(RIGHT * 0.125), group2.animate.shift(LEFT * 0.125), t1.animate.shift(UP * 0.5), t2.animate.shift(DOWN * 0.5), t3.animate.shift(UP * 0.5), t4.animate.shift(DOWN * 0.5))
+        self.wait(1.5)
         self.play(group1.animate.shift(DOWN * 0.25 * 13))
-        self.wait(1)
+        self.wait(1.25)
 
         group1.remove(*[dots[i] for i in range(0,8)])
         group2.add(*[dots[i] for i in range(0,8)])

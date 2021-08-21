@@ -165,8 +165,8 @@ class Decomp(Scene):
         self.play(numbers.animate.shift(DOWN), decompView.animate.shift(DOWN), numberhideboxes.animate.shift(DOWN), FadeIn(fibonacci))
         self.wait(1)
         self.play(fibonacci.animate.shift(RIGHT * 14), run_time=5)
-        self.wait(1)
-        self.play(FadeOut(fibonacci), numbers.animate.shift(UP * 0.75), decompView.animate.shift(UP).stretch_to_fit_height(6), numberhideboxes[0].animate.shift(UP * 2), FadeIn(baseText))
+        self.wait(3)
+        self.play(FadeOut(fibonacci), numbers.animate.shift(UP * 0.75), decompView.animate.shift(UP).stretch_to_fit_height(6), numberhideboxes[0].animate.shift(UP * 2), Write(baseText))
         self.wait(1)
         for i in range(0,7):
             self.play(numbers.animate.shift(UP * 0.5), run_time=0.75)

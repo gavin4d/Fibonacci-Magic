@@ -1,5 +1,4 @@
 from manim import *
-from numpy.core.records import array
 from functions import *
 import color
 
@@ -8,10 +7,10 @@ class Title(Scene):
     def construct(self):
         self.camera.background_color = color.BACKGROUND
         title = Text('Fibonacci Magic').scale(1.5).set_color(color.BLUE)
-        subtitle = Text('An exploration of mysterious methods').scale(0.7).set_color(color.RED)
+        subtitle = Text('A visual exploration of intriguing identities').scale(0.7).set_color(color.RED)
         wholeTitle = VGroup(title, subtitle).arrange(DOWN)
-        self.play(Write(title), FadeIn(subtitle), run_time=3)
-        self.wait(3)
+        self.play(LaggedStart(Write(title), FadeIn(subtitle), lag_ratio=0.4, run_time=5))
+        self.wait(1)
         self.play(FadeOut(wholeTitle))
 
 class AboutFibo(Scene):
@@ -40,23 +39,23 @@ class AboutFibo(Scene):
             dotGroups1 = dotGroups2old
             self.play(dotGroups2.animate.set_color(color.RED))
             
-        self.wait(2)
+        self.wait(6)
 
         rect = Rectangle(color=color.YELLOW, width=2.25, height=1).move_to(DOWN * 2.75 + RIGHT * 0.625)
 
         self.play(FadeIn(rect))
 
-        self.play(rect.animate.shift(LEFT * 2 * 1.25), run_time=1.75)
-
-        self.play(rect.animate.shift(RIGHT * 3 * 1.25), run_time=2.5)
-
-        self.play(rect.animate.shift(LEFT * 1 * 1.25), run_time=1.25)
-
-        self.play(rect.animate.shift(RIGHT * 2 * 1.25), run_time=1.75)
-
-        self.play(rect.animate.shift(LEFT * 3 * 1.25), run_time=2.25)
+        self.play(rect.animate.shift(LEFT * 2 * 1.25), run_time=1)
 
         self.wait(0.5)
+
+        self.play(rect.animate.shift(RIGHT * 3 * 1.25), run_time=1.5)
+
+        self.wait(0.5)
+
+        self.play(rect.animate.shift(LEFT * 2 * 1.25), run_time=1)
+
+        self.wait(1)
 
         self.play(FadeIn(Square().scale(10).set_fill(color.BACKGROUND).set_opacity(1)))
 
