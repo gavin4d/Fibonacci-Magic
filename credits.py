@@ -8,13 +8,10 @@ class Credits(MovingCameraScene):
         self.camera.background_color = color.BACKGROUND
         dots = [Dot().set_color(color.RED).move_to(UP * 0.25 * (10-i)) for i in range(0,21)]
 
-        numberhidebox1 = Square().scale(2).move_to(UP * (2.25 - 3))
-        numberhidebox1.set_fill(color.BACKGROUND, opacity=1).set_color(color.BACKGROUND)
-        numberhidebox2 = Square().scale(2).move_to(DOWN * 5.25)
-        numberhidebox2.set_fill(color.BACKGROUND, opacity=1).set_color(color.BACKGROUND)
-
         creditsbox = Rectangle(color=BLACK, fill_opacity= 1, width= 5, height=7.5)
         creditsbox.shift(RIGHT * 6)
+        creditsborder = SurroundingRectangle(creditsbox, color=color.YELLOW, buff=0)
+
         lineSpace = 2
 
         creditstext = VGroup(
@@ -56,7 +53,7 @@ class Credits(MovingCameraScene):
         alldots = VGroup()
         alldots.add(*[dots[i] for i in range(0,21)])
 
-        self.add(numberhidebox1, numberhidebox2, creditsbox)
+        self.add(creditsbox, creditsborder)
 
         self.camera.frame.move_to(RIGHT * 3)
 
