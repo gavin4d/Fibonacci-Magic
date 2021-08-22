@@ -22,20 +22,20 @@ class Credits(MovingCameraScene):
           Text("of 3Blue1Brown"),
           Text("for inspiring us"),
           Text("to make"),
-          Text("this video")).arrange(DOWN * lineSpace),
+          Text("this video.")).arrange(DOWN * lineSpace),
           VGroup(
           Text("Phi Guys are an"),
           Text("entirely"),
           Text("original creation,"),
           Text("and not to be"),
           Text("confused with"),
-          Text("Pi Guys")).arrange(DOWN * lineSpace),
+          Text("Pi Guys.")).arrange(DOWN * lineSpace),
           VGroup(
           Text("No Phi Guys"),
           Text("or Pi Guys"),
           Text("were harmed"),
           Text("in the creation"),
-          Text("of this video")).arrange(DOWN * lineSpace),
+          Text("of this video.")).arrange(DOWN * lineSpace),
           VGroup(
           Text("Animations created"),
           Text("with Manim."),
@@ -44,18 +44,18 @@ class Credits(MovingCameraScene):
           Text("Manim community for"),
           Text("making such a"),
           Text("great math animation"),
-          Text("library")).arrange(DOWN * lineSpace),
+          Text("library!")).arrange(DOWN * lineSpace),
           VGroup(
           Text("Music:\n"
                "\"Dolphin-esque\"\n"
-               "    by Godmode.\n"
+               "    by Godmode\n"
                "\"Wind Riders\"\n"
-               "    by Asher Fulero.\n"
+               "    by Asher Fulero\n"
                "\"Sunrise in Paris\"\n"
-               "    by Dan Henig.", line_spacing=lineSpace-1.5),).arrange(DOWN * lineSpace),
+               "    by Dan Henig", line_spacing=lineSpace-1.5),).arrange(DOWN * lineSpace),
           VGroup(
           Text("Don't forget to"),
-          Text("like and subscribe")).arrange(DOWN * lineSpace),
+          Text("like and subscribe!")).arrange(DOWN * lineSpace),
           VGroup(
           Text("Stay tuned"),
           Text("for future videos!")).arrange(DOWN * lineSpace)]
