@@ -36,43 +36,56 @@ class Credits(MovingCameraScene):
 
         creditsbox = Rectangle(color=BLACK, fill_opacity= 1, width= 5, height=7.5)
         creditsbox.shift(RIGHT * 6)
-        lineSpace = 2
+        lineSpace = 3.75
 
-        creditstext = VGroup(
-            Text("Thanks for watching!", line_spacing=lineSpace),
-            Text("  A big thank you to\n "
-                 "   Grant Sanderson \n"
-                 "    of 3Blue1Brown\n"
-                 "    for inspiring us \n"
-                 "          to make \n"
-                 "        this video", line_spacing=lineSpace),
-            Text("Phi Guys are an \n"
-                 "       entirely \n"
-                 "  original creation,\n"
-                 "   and not to be\n"
-                 "   confused with\n"
-                 "            Pi Guys", line_spacing=lineSpace),
-            Text(" No Phi Guys\n"
-                 "  or Pi Guys \n"
-                 " were harmed\n"
-                 "in the creation\n"
-                 " of this video", line_spacing=lineSpace),
-            Text("Animations created\n"
-                 "   with Manim.\n"
-                 "Thanks to everyone\n"
-                 "     in the \n"
-                 "Manim community for\n"
-                 "    making such a \n"
-                 "great math animation\n"
-                 "      library", line_spacing=lineSpace),
-            Text("Music:"),
-            Text("  Don't forget to\n"
-                 "like and subscribe", line_spacing=lineSpace),
-            Text("   Stay tuned\n"
-                 "for future videos!", line_spacing=lineSpace)
-        )
+        creditstext = [VGroup(
+          Text("Thanks for watching!")).arrange(DOWN * lineSpace), 
+          VGroup(
+          Text("A big thank you to"),
+          Text("Grant Sanderson"),
+          Text("of 3Blue1Brown"),
+          Text("for inspiring us"),
+          Text("to make"),
+          Text("this video")).arrange(DOWN * lineSpace), 
+          VGroup(
+          Text("Phi Guys are an"),
+          Text("entirely"),
+          Text("original creation,"),
+          Text("and not to be"),
+          Text("confused with"),
+          Text("Pi Guys")).arrange(DOWN * lineSpace), 
+          VGroup(
+          Text("No Phi Guys"),
+          Text("or Pi Guys"),
+          Text("were harmed"),
+          Text("in the creation"),
+          Text("of this video")).arrange(DOWN * lineSpace), 
+          VGroup(
+          Text("Animations created"),
+          Text("with Manim."),
+          Text("Thanks to everyone"),
+          Text("in the"),
+          Text("Manim community for"),
+          Text("making such a"),
+          Text("great math animation"),
+          Text("library")).arrange(DOWN * lineSpace), 
+          VGroup(
+          Text("Music:\n"
+               "\"Dolphin-esque\"\n"
+               "    by Godmode.\n"
+               "\"Wind Riders\"\n"
+               "    by Asher Fulero.\n"
+               "\"Sunrise in Paris\"\n"
+               "    by Dan Henig.", line_spacing=lineSpace-1.5),).arrange(DOWN * lineSpace), 
+          VGroup(
+          Text("Don't forget to"),
+          Text("like and subscribe")).arrange(DOWN * lineSpace), 
+          VGroup(
+          Text("Stay tuned"),
+          Text("for future videos!")).arrange(DOWN * lineSpace)]
 
-        creditstext.scale(0.5).move_to(creditsbox)
+        for i in creditstext:
+             i.scale(0.5).move_to(creditsbox)
 
         alldots = VGroup()
         alldots.add(*[dots[i] for i in range(0,21)])
