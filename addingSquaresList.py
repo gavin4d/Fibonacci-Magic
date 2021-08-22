@@ -1,4 +1,3 @@
-from typing_extensions import runtime
 from manim import *
 from functions import *
 import color
@@ -33,6 +32,10 @@ class AddingSquares(Scene):
             if fibo[2*(i+n)] >= 10:
                 labels[i][1].shift(RIGHT * .12)
 
+        boxGroup = VGroup(*[labels[2].copy()[i] for i in [0,2,3,4]])
+
+        box = SurroundingRectangle(boxGroup, buff=0.2)
+
         general = Tex('${f_n}^2\quad +\quad {f_{n+1}}^2\quad =\quad f_{2n+1}$').set_color(BLACK)
 
         self.play(LaggedStart(*[FadeIn(labels[i][0]) for i in range(0,rows)], lag_ratio=0.15, run_time=2))
@@ -42,8 +45,10 @@ class AddingSquares(Scene):
         self.play(FadeOut(*[labels[i][1] for i in range(0,rows)]))
         self.wait(0.5)
         self.play(LaggedStart(*[FadeIn(*[labels[i][l] for i in range(0,rows)]) for l in range(2,5)]))
-        self.wait(8)
-        self.play(FadeOut(*[labels[i][l] for i in range(0,rows) for l in [0,2,3,4]]))
+        self.wait(3)
+        self.play(FadeIn(box))
+        self.wait(4)
+        self.play(FadeOut(*[labels[i][l] for i in range(0,rows) for l in [0,2,3,4]], box))
         self.play(FadeIn(general))
         self.wait(5)
         self.play(FadeIn(Square().scale(10).set_fill(color.BACKGROUND).set_opacity(1)))
