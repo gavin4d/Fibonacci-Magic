@@ -10,7 +10,7 @@ class Start(Scene):
         self.camera.background_color = color.BACKGROUND
         dots = [Dot().set_color(color.RED).move_to(UP * 0.25 * (10-i)) for i in range(0,21)]
 
-        baseText = Text('  ×   +   ×  ').scale(0.5).set_color(BLACK).move_to(DOWN * 3)
+        baseText = Text('×     +     ×').scale(0.5).set_color(BLACK).move_to(DOWN * 3)
 
         t1 = VGroup()
         t2 = VGroup()
@@ -23,10 +23,10 @@ class Start(Scene):
             t3.add(Text(str(fibo[9-n-i])).set_color(color.BLUE))
             t4.add(Text(str(fibo[9-n-i])).set_color(color.BLUE))
 
-        t1.scale(0.5).arrange(DOWN).move_to(LEFT * 0.9 + DOWN * (1.75 + 3))
-        t2.scale(0.5).arrange(DOWN).move_to(LEFT * 0.3 + UP * (1.75 - 3))
-        t3.scale(0.5).arrange(DOWN).move_to(RIGHT * 0.3 + DOWN * (1.75 + 3))
-        t4.scale(0.5).arrange(DOWN).move_to(RIGHT * 0.9 + UP * (1.75 - 3))
+        t1.scale(0.5).arrange(DOWN).move_to(LEFT * 1.15 + DOWN * (1.75 + 3))
+        t2.scale(0.5).arrange(DOWN).move_to(LEFT * 0.4 + UP * (1.75 - 3))
+        t3.scale(0.5).arrange(DOWN).move_to(RIGHT * 0.4 + DOWN * (1.75 + 3))
+        t4.scale(0.5).arrange(DOWN).move_to(RIGHT * 1.15 + UP * (1.75 - 3))
         self.add(t1, t2, t3, t4)
 
         numberhidebox1 = Square().scale(2).move_to(UP * (2.25 - 3))
