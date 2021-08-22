@@ -42,18 +42,7 @@ class PauseOnSquare(MovingCameraScene):
         self.camera.frame.save_state()
         camScale = 1.3
 
-        self.play(self.camera.frame.animate.scale(camScale).move_to(UP * 1.5), FadeIn(baseText), FadeIn(t1), FadeIn(t2), FadeIn(t3), FadeIn(t4), GrowFromCenter(dots[0]),
-                  GrowFromCenter(dots[1]), GrowFromCenter(dots[2]), GrowFromCenter(dots[3]),
-                  GrowFromCenter(dots[4]), GrowFromCenter(dots[5]), GrowFromCenter(dots[6]),
-                  GrowFromCenter(dots[7]), GrowFromCenter(dots[8]), GrowFromCenter(dots[9]),
-                  GrowFromCenter(dots[10]), GrowFromCenter(dots[11]), GrowFromCenter(dots[12]),
-                  GrowFromCenter(dots[13]), GrowFromCenter(dots[14]), GrowFromCenter(dots[15]),
-                  GrowFromCenter(dots[16]), GrowFromCenter(dots[17]), GrowFromCenter(dots[18]),
-                  GrowFromCenter(dots[19]), GrowFromCenter(dots[20]), GrowFromCenter(dots[21]),
-                  GrowFromCenter(dots[22]), GrowFromCenter(dots[23]), GrowFromCenter(dots[24]),
-                  GrowFromCenter(dots[25]), GrowFromCenter(dots[26]), GrowFromCenter(dots[27]),
-                  GrowFromCenter(dots[28]), GrowFromCenter(dots[29]), GrowFromCenter(dots[30]),
-                  GrowFromCenter(dots[31]), GrowFromCenter(dots[32]), GrowFromCenter(dots[33]))
+        self.play(self.camera.frame.animate.scale(camScale).move_to(UP * 1.5), FadeIn(baseText), FadeIn(t1), FadeIn(t2), FadeIn(t3), FadeIn(t4), *[GrowFromCenter(dots[i]) for i in range(0,34)])
 
         group1 = VGroup()
         group1.add(*[dots[i] for i in range(0,13)])
@@ -100,10 +89,9 @@ class PauseOnSquare(MovingCameraScene):
                   t4.animate.shift(DOWN * 0.5))
         self.wait(1)
 
-        self.remove(baseText)
-        baseText = Text('+').scale(0.5).set_color(BLACK).move_to(DOWN * 3)
-        self.add(baseText)
-        self.play(t1.animate.shift(RIGHT * 0.38), t2.animate.shift(LEFT * 0.38),
+        newbaseText = Text('+').scale(0.5).set_color(BLACK).move_to(DOWN * 3)
+        self.add(newbaseText)
+        self.play(FadeOut(baseText), t1.animate.shift(RIGHT * 0.38), t2.animate.shift(LEFT * 0.38),
                   t3.animate.shift(RIGHT * 0.38), t4.animate.shift(LEFT * 0.38) )
         self.remove(t1, t3)
         exp1 = Text('2').scale(0.3).set_color(BLACK).move_to(RIGHT * 0.95 + DOWN * 2.75)
@@ -116,8 +104,7 @@ class PauseOnSquare(MovingCameraScene):
 
         thirtyfour = Text(str(fiboarray(10)[9])).scale(0.5).set_color(BLACK).move_to(LEFT * 0.375 + DOWN * 3)
 
-        self.remove(t1, t2, t3, t4)
-        self.play(Transform(result, thirtyfour), FadeOut(exp1), FadeOut(exp2), FadeOut(baseText))
+        self.play(Transform(result, thirtyfour), FadeOut(exp1, exp2, newbaseText, t2[4], t4[4]))
 
         vgap = 0.55
 
@@ -167,7 +154,8 @@ class PauseOnSquare(MovingCameraScene):
 
 
         redgroup3.next_to(redgroup2[1], LEFT, buff=1)
-        oddfibos[0].next_to(redgroup3[2], DOWN, buff=vgap)
+        redgroup3center = VGroup(redgroup3[0], redgroup3[2])
+        oddfibos[0].next_to(redgroup3center, DOWN, buff=vgap)
 
         oddfibos[2].move_to(result)
 
@@ -176,12 +164,12 @@ class PauseOnSquare(MovingCameraScene):
         evenfibos[2].next_to(result, RIGHT, buff=1.2)
         evenfibos[3].next_to(oddfibos[3], RIGHT, buff=1.5)
 
-        self.add(redgroup1, redgroup2, redgroup3, oddfibos)
+        self.play(*[GrowFromCenter(redgroup3[i]) for i in range(0,5)], *[GrowFromCenter(redgroup2[i]) for i in range(0,13)], *[GrowFromCenter(redgroup1[i]) for i in range(0,89)], FadeIn(oddfibos))
         self.remove(oddfibos[2])
 
         self.wait(1)
         self.play(FadeIn(evenfibos))
-        self.wait(1)
+        self.wait(2)
 
         labels = VGroup(Tex('$f_5$'), Tex('$f_7$'), Tex('$f_9$'), Tex('$f_{11}$'))
         labels.set_color(BLACK).scale(0.8)
@@ -190,5 +178,5 @@ class PauseOnSquare(MovingCameraScene):
         self.play(Transform(oddfibos[0], labels[0]), Transform(oddfibos[1], labels[1]), Transform(result,
         labels[2]), Transform(oddfibos[3], labels[3]), FadeOut(evenfibos))
 
-        self.wait(1)
+        self.wait(3)
         self.play(FadeIn(Square().scale(10).set_fill(color.BACKGROUND).set_opacity(1)))
